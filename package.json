@@ -1,0 +1,24 @@
+{
+  "name": "lolz",
+  "version": "0.0.0",
+  "description": "new project starter kit",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ./node_modules/typescript/bin/tsc -p tsconfig.json",
+    "test": "node ./node_modules/mocha/bin/mocha --require ts-node/register \"./test/**/*.ts\"",
+    "lint": "npm run tslint:fix && npm run prettier",
+    "prettier": "prettier --config \"./.prettierrc\" --write {src,test}/**/*.ts",
+    "tslint": "tslint \"{src,test}/**/*.ts\" --format stylish",
+    "tslint:fix": "tslint \"{src,test}/**/*.ts\" --format stylish --fix"
+  },
+  "keywords": ["lolz"],
+  "author": "Bartek Specjalny <bspecjalny@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.1.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^5.1.1",
+    "ts-node": "^6.0.3",
+    "typescript": "^2.8.3"
+  }
+}
