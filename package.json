@@ -1,24 +1,42 @@
 {
-  "name": "lolz",
+  "name": "lnug-02",
   "version": "0.0.0",
-  "description": "new project starter kit",
+  "description": "Scheduled Async Task Exectur",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node ./node_modules/typescript/bin/tsc -p tsconfig.json",
-    "test": "node ./node_modules/mocha/bin/mocha --require ts-node/register \"./test/**/*.ts\"",
-    "lint": "npm run tslint:fix && npm run prettier",
-    "prettier": "prettier --config \"./.prettierrc\" --write {src,test}/**/*.ts",
-    "tslint": "tslint \"{src,test}/**/*.ts\" --format stylish",
-    "tslint:fix": "tslint \"{src,test}/**/*.ts\" --format stylish --fix"
+    "build": "tsc -p tsconfig.json",
+    "build:clean": "rm -rf ./dist && npm run build",
+    "ts-node:rmq": "ts-node -r tsconfig-paths/register ./src/rabbitmq/index.ts",
+    "watch:rmq": "nodemon -e .ts --exec yarn ts-node:rmq",
+    "ts-node:r": "ts-node -r tsconfig-paths/register ./src/redis/index.ts",
+    "watch:r": "nodemon -e .ts --exec yarn ts-node:r",
+    "ts-node:pg": "ts-node -r tsconfig-paths/register ./src/postgres/index.ts",
+    "watch:pg": "nodemon -e .ts --exec yarn ts-node:pg",
+    "ts-node:amq": "ts-node -r tsconfig-paths/register ./src/activemq/index.ts",
+    "watch:amq": "nodemon -e .ts --exec yarn ts-node:amq"
   },
-  "keywords": ["lolz"],
+  "keywords": [
+    "lnug-02"
+  ],
   "author": "Bartek Specjalny <bspecjalny@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^10.1.0",
-    "expect.js": "^0.3.1",
-    "mocha": "^5.1.1",
+    "@types/mocha": "^5.2.0",
+    "@types/node": "^10.5.2",
+    "@types/pg": "^7.4.10",
+    "amqplib": "^0.5.2",
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.17.5",
+    "pg": "^7.4.3",
+    "redis": "^2.8.0",
+    "rhea": "^0.2.17",
     "ts-node": "^6.0.3",
-    "typescript": "^2.8.3"
+    "tsconfig-paths": "^3.4.0",
+    "typescript": "^2.8.3",
+    "util-promisifyall": "^1.0.3",
+    "uuid": "^3.3.2"
+  },
+  "engines": {
+    "node": "8.11.3"
   }
 }
