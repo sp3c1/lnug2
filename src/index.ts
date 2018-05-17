@@ -1,3 +1,0 @@
-class x {
-  x(): void {}
-}
