@@ -15,7 +15,7 @@ async function bootstrap() {
     await publisher.publish('this is my delayed Message zero', 'lnug2', { AMQ_SCHEDULED_DELAY: 5000 });
 
     await consumer.consume('lnug2', 1, (msg, ack) => {
-      console.log('=== buffer: ', Buffer.isBuffer(msg), '===', Buffer.isBuffer(msg) ? msg.toString('utf-8') : msg, '===');
+      console.log('=== buffer: ', Buffer.isBuffer(msg.body), '===', Buffer.isBuffer(msg.body) ? msg.body.toString('utf-8') : msg.body, '===');
       ack();
     });
   } catch (e) {
