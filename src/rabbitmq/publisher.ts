@@ -37,11 +37,6 @@ export class Publishers {
 
   async publish(queue: string, replyTo: string, options: any, data: string): Promise<void> {
     await this.conditionalAttach(queue);
-    // options.replyTo = replyTo;
-    // options["x-dead-letter-exchange"] = queue;
-    // options["x-dead-letter-routing-key"] = replyTo;
-    // options["expiration"] = 5000;
-    // data = JSON.stringify(data); // now its a string, casting later for TS to pick up
     return this.list[queue].sendToQueue(data, options);
   }
 

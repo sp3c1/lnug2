@@ -6,7 +6,7 @@ export class PublisherAMQ100 extends Amqp100Implementations {
     super(config, 'publisher');
   }
 
-  async publish(message: string | Buffer, queue: string = 'default', options: any = {}): Promise<any> {
+  async publish(message: any, queue: string = 'default', options: any = {}): Promise<any> {
     await this.createQueue(queue);
 
     return this.handler.send(<Rhea.Message>{ body: message, application_properties: options });

@@ -15,13 +15,12 @@ async function bootstrap() {
     Promise.all([publishers.init(), consumers.init()]);
 
     publishers.init().then(async () => {
-      await publishers.publish('test', null, 20000, 'this is my delayed Message zero longer');
-      await publishers.publish('test', null, 10000, 'this is my delayed Message zero');
+      await publishers.publish('test', null, 20000, 'this is my delayed Message 1');
+      await publishers.publish('test', null, 10000, 'this is my delayed Message 2');
 
-      await consumers.subscribe('test', {}, 1, (msg, msgRaw, ack) => {
+      await consumers.subscribe('test', {}, 1, async (msg, msgRaw, ack) => {
         console.log('===', msg, '===', msgRaw, '===');
-        ack();
-        // subscribers.closeConnection();
+        await ack();
       });
     });
   } catch (e) {}

@@ -9,14 +9,14 @@ async function bootstrap() {
   try {
     await Promise.all([publisher.init(), consumer.init()]);
 
-    await publisher.publish(new Buffer('this is my delayed Message zero longer'), 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
-    await publisher.publish(new Buffer('this is my delayed Message zero longer'), 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
-    await publisher.publish(new Buffer('this is my delayed Message zero longer'), 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
-    await publisher.publish('this is my delayed Message zero', 'lnug2', { AMQ_SCHEDULED_DELAY: 5000 });
+    await publisher.publish(new Buffer('this is my delayed Message 1'), 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
+    await publisher.publish(new Buffer('this is my delayed Message 2'), 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
+    await publisher.publish({ msg: 'this is my delayed Message 3' }, 'lnug2', { AMQ_SCHEDULED_DELAY: 10000 });
+    await publisher.publish('this is my delayed Message 4', 'lnug2', { AMQ_SCHEDULED_DELAY: 5000 });
 
-    await consumer.consume('lnug2', 1, (msg, ack) => {
-      console.log('=== buffer: ', Buffer.isBuffer(msg.body), '===', Buffer.isBuffer(msg.body) ? msg.body.toString('utf-8') : msg.body, '===');
-      ack();
+    await consumer.consume('lnug2', 1, async (msg, ack) => {
+      console.log('=== typeof:', Buffer.isBuffer(msg.body) ? 'buffer' : typeof msg.body, '===', Buffer.isBuffer(msg.body) ? msg.body + ' => ' + msg.body.toString('utf-8') : msg.body, '===');
+      await ack();
     });
   } catch (e) {
     console.log(e);

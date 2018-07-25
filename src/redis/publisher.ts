@@ -1,6 +1,5 @@
 import * as redis from 'redis';
 import * as promisify from 'util-promisifyall';
-import * as uuid from 'uuid';
 
 promisify(redis.RedisClient.prototype);
 promisify(redis.Multi.prototype);
